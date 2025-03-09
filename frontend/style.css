@@ -59,34 +59,78 @@ button:hover {
     opacity: 0.8;
 }
 
-/* Modal styling */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
+/* Styling untuk modal edit mahasiswa */
 .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.close {
-    float: right;
-    font-size: 24px;
-    cursor: pointer;
+.modal-header {
+    background-color: #007bff;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: none;
+    padding: 10px 20px;
+}
+
+/* Styling input dalam modal */
+.modal-body input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* Tombol dalam modal */
+.modal-body .btn-primary {
+    width: 100%;
+    background-color: #007bff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.modal-body .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Animasi modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal.fade .modal-dialog {
+    animation: fadeIn 0.3s;
+}
+
+/* Responsif */
+@media (max-width: 576px) {
+    .modal-dialog {
+        max-width: 90%;
+    }
+}
+
 
 /* Notification styling */
 .notification {
@@ -105,58 +149,73 @@ button:hover {
     background-color: #dc3545;
 }
 
-
-/* Navbar */
+/* Navbar Fixed */
 .navbar {
-    background: linear-gradient(135deg, #007bff, #0056b3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #007bff; /* Warna biru Bootstrap */
     color: white;
-    padding: 15px 0;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Container Navbar */
 .navbar .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 30px;
+    justify-content: space-between;
+    width: 100%;
 }
 
+/* Logo */
 .navbar .logo {
-    font-size: 22px;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .navbar .logo-img {
+    width: 40px;
     height: 40px;
     margin-right: 10px;
 }
 
-.navbar .nav-links {
+/* Menu Links */
+.nav-links {
     list-style: none;
     display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
 }
 
-.navbar .nav-links li {
-    margin-left: 20px;
+.nav-links li {
+    display: inline-block;
 }
 
-.navbar .nav-links a {
-    color: white;
+.nav-links a {
     text-decoration: none;
-    font-size: 16px;
+    color: white;
     font-weight: 500;
-    transition: color 0.3s ease-in-out;
+    padding: 8px 12px;
+    transition: 0.3s;
 }
 
-.navbar .nav-links a:hover {
-    color: #ffcc00;
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
 }
 
-/* Mobile View */
+/* Mobile Menu Toggle */
 .menu-toggle {
     display: none;
     font-size: 24px;
@@ -166,27 +225,23 @@ button:hover {
     cursor: pointer;
 }
 
-/* Responsiveness */
-@media (max-width: 768px) {
+/* Responsive Mobile */
+@media screen and (max-width: 768px) {
     .nav-links {
         display: none;
         flex-direction: column;
         position: absolute;
         top: 60px;
-        right: 30px;
-        background: #007bff;
+        right: 0;
+        background-color: #007bff;
         width: 200px;
-        border-radius: 5px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: right;
+        padding: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links.active {
         display: flex;
-    }
-
-    .nav-links li {
-        margin: 10px 0;
-        text-align: center;
     }
 
     .menu-toggle {
@@ -194,17 +249,71 @@ button:hover {
     }
 }
 
-
-/* Footer */
+/* Tambahkan padding agar konten tidak tertutup navbar */
+body {
+    padding-top: 60px;
+}
+/* Footer tetap di bawah */
 .footer {
-    background-color: #333;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #343a40; /* Warna latar belakang */
     color: white;
     text-align: center;
-    padding: 15px 0;
-    margin-top: 20px;
+    padding: 10px 0;
+    font-size: 14px;
 }
 
-.footer .container {
-    max-width: 1200px;
-    margin: auto;
+/* Agar konten tidak tertutup footer */
+body {
+    padding-bottom: 50px; /* Sesuaikan dengan tinggi footer */
+}
+
+
+
+
+
+/* Gaya untuk gambar thumbnail */
+.img-thumbnail {
+    max-width: 100px; /* Set a maximum width for the thumbnail */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0.25rem; /* Rounded corners */
+    border: 1px solid #dee2e6; /* Border color */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+/* Gaya untuk gambar yang lebih besar (misalnya, saat di modal) */
+.img-full {
+    max-width: 300px; /* Set a maximum width for full image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+/* Efek hover untuk thumbnail */
+.img-thumbnail:hover {
+    transform: scale(1.05); /* Slightly enlarge the image on hover */
+}
+
+/* Gaya untuk gambar di modal */
+.modal-body img {
+    max-width: 100%; /* Make sure the image fits within the modal */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0.5rem; /* Rounded corners */
+}
+
+/* Gaya untuk gambar yang tidak ada */
+.no-image {
+    width: 100px; /* Set a fixed width for the placeholder */
+    height: 100px; /* Set a fixed height for the placeholder */
+    background-color: #f0f0f0; /* Light gray background */
+    display: flex; /* Center the text */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    border: 1px dashed #ccc; /* Dashed border */
+    border-radius: 0.25rem; /* Rounded corners */
+    color: #999; /* Gray text color */
+    font-size: 14px; /* Font size */
 }
